@@ -22,7 +22,7 @@ void UHealthComponent::BeginPlay()
 	AActor* OwnerActor = GetOwner();
 	if (OwnerActor)
 	{
-		OwnerActor->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::OnTakeDamage);
+		OwnerActor->OnTakeAnyDamage.AddUniqueDynamic(this, &UHealthComponent::OnTakeDamage);
 	}
 }
 
@@ -33,5 +33,7 @@ void UHealthComponent::OnTakeDamage(AActor* DamagedActor, float Damage, const UD
 	{
 		return;
 	}
+	UE_LOG(LogTemp, Warning, TEXT("CurrentHealth = %d"), CurrentHealth);
 	CurrentHealth = FMath::Clamp(CurrentHealth - static_cast<int32>(Damage), 0, MaxHealth);
+	UE_LOG(LogTemp, Warning, TEXT("CurrentHealth = %d"), CurrentHealth);
 }
