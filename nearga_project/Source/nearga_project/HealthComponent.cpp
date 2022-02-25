@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "HealthComponent.h"
+ #include "HealthComponent.h"
 
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
@@ -18,22 +18,19 @@ UHealthComponent::UHealthComponent()
 void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	AActor* OwnerActor = GetOwner();
-	if (OwnerActor)
-	{
-		OwnerActor->OnTakeAnyDamage.AddUniqueDynamic(this, &UHealthComponent::OnTakeDamage);
-	}
+	
 }
 
-void UHealthComponent::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
-	AController* InstigatedBy, AActor* DamageCauser)
+void UHealthComponent::TakeDamage(const int32 Damage)
 {
-	if (Damage <= 0)
-	{
-		return;
-	}
-	UE_LOG(LogTemp, Warning, TEXT("CurrentHealth = %d"), CurrentHealth);
-	CurrentHealth = FMath::Clamp(CurrentHealth - static_cast<int32>(Damage), 0, MaxHealth);
-	UE_LOG(LogTemp, Warning, TEXT("CurrentHealth = %d"), CurrentHealth);
+	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0, MaxHealth);
+	UE_LOG(LogTemp, Warning, TEXT("Got %d damage"), Damage);
+
+	
+}
+
+void UHealthComponent::RestoreHealth(const int32 PointsToRestore)
+{
+	CurrentHealth = FMath::Clamp(CurrentHealth + PointsToRestore, 0, MaxHealth);
+	UE_LOG(LogTemp, Warning, TEXT("Restored %d HP"), PointsToRestore);
 }

@@ -20,8 +20,11 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	UFUNCTION()
-	void OnTakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+	UFUNCTION(BlueprintCallable)
+	void TakeDamage(const int32 Damage);
+
+	UFUNCTION(BlueprintCallable)
+	void RestoreHealth(const int32 PointsToRestore);
 
 protected:
 
