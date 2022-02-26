@@ -12,6 +12,14 @@
 //////////////////////////////////////////////////////////////////////////
 // Anearga_projectCharacter
 
+void Anearga_projectCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	UE_LOG(LogTemp, Warning, TEXT("Character has begun play"));
+	
+}
+
 Anearga_projectCharacter::Anearga_projectCharacter()
 {
 	// Set size for collision capsule

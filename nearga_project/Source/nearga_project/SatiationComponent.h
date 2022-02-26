@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "PlayerHUD.h"
 #include "SatiationComponent.generated.h"
 
 
@@ -29,7 +30,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
+	
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
@@ -44,6 +45,8 @@ protected:
 	float HungerDamageRate;
 	
 	UPROPERTY()
-	FTimerHandle  TimerHandle;
+	FTimerHandle TimerHandle;
+	UPROPERTY()
+	APlayerHUD* PlayerHUD;
 	
 };

@@ -18,12 +18,18 @@ class NEARGA_PROJECT_API APlayerHUD : public AHUD
 public:
 
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void UpdateSatiation(int32 CurrentSatiation, int32 MaxSatiation);
 	
 public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
 	TSubclassOf<UUserWidget> PlayerWidgetClass;
 
+private:
+	
 	UPROPERTY()
 	UWidgetHUD* WidgetHUD;
+	
 };

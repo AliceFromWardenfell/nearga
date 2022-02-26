@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "PlayerHUD.h"
 #include "nearga_projectCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -18,7 +19,13 @@ class Anearga_projectCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
 public:
+
+	virtual void BeginPlay() override;
+	
+public:
+	
 	Anearga_projectCharacter();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
