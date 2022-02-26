@@ -28,12 +28,8 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void Eat(const int32 PointsToRestore);
 
-	UFUNCTION(BlueprintCallable)
-	void InflictHealthDamage();
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	//UFUNCTION(BlueprintCallable)
+	//void InflictHealthDamage();
 	
 protected:
 
@@ -55,10 +51,10 @@ protected:
 	
 	UPROPERTY()
 	FTimerHandle SatiationTimerHandle;
-	UPROPERTY()
-	FTimerHandle HealthTimerHandle;
-	UPROPERTY()
-	UHealthComponent* HealthComponent;
+	//UPROPERTY()
+	//FTimerHandle HealthTimerHandle;
+	//UPROPERTY()
+	//UHealthComponent* HealthComponent;
 	UPROPERTY()
 	APlayerHUD* PlayerHUD;
 	

@@ -35,8 +35,8 @@ void USatiationComponent::BeginPlay()
 	GetOwner()->GetWorldTimerManager().SetTimer(SatiationTimerHandle, this, &USatiationComponent::TakeHungerDamage, HungerRate, true, 0.5f);
 	UE_LOG(LogTemp, Warning, TEXT("Satiation timer has been set"));
 
-	GetOwner()->GetWorldTimerManager().SetTimer(HealthTimerHandle, this, &USatiationComponent::InflictHealthDamage, DamageRate, true, 0.5f);
-	UE_LOG(LogTemp, Warning, TEXT("Health timer has been set"));
+	//GetOwner()->GetWorldTimerManager().SetTimer(HealthTimerHandle, this, &USatiationComponent::InflictHealthDamage, DamageRate, true, 0.5f);
+	//UE_LOG(LogTemp, Warning, TEXT("Health timer has been set"));
 }
 
 void USatiationComponent::TakeHungerDamage()
@@ -54,15 +54,7 @@ void USatiationComponent::Eat(const int32 PointsToRestore)
 	UE_LOG(LogTemp, Warning, TEXT("Restored %d satiation"), PointsToRestore);
 }
 
-void USatiationComponent::InflictHealthDamage()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Inflicted %d damage from hunger"), DamageToInflict);
-}
-
-
-// Called every frame
-void USatiationComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	
-}
+//void USatiationComponent::InflictHealthDamage()
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("Inflicted %d damage from hunger"), DamageToInflict);
+//}

@@ -21,6 +21,8 @@ public:
 
 	UFUNCTION()
 	void UpdateSatiation(int32 CurrentSatiation, int32 MaxSatiation);
+	UFUNCTION()
+	void UpdateHealth(int32 CurrentHealth, int32 MaxHealth);
 	
 public:
 
