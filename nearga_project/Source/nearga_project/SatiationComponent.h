@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "PlayerHUD.h"
+#include "HealthComponent.h"
 #include "SatiationComponent.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable, DisplayName="SatiationComponent" )
 class NEARGA_PROJECT_API USatiationComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -27,6 +28,9 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void Eat(const int32 PointsToRestore);
 
+	UFUNCTION(BlueprintCallable)
+	void InflictHealthDamage();
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -40,12 +44,21 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	int32 CurrentSatiation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
-	int32 HungerDamage;
+	int32 HungerPower;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
-	float HungerDamageRate;
+	float HungerRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DamageFromHunger")
+	int32 DamageToInflict;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DamageFromHunger")
+	float DamageRate;
 	
 	UPROPERTY()
-	FTimerHandle TimerHandle;
+	FTimerHandle SatiationTimerHandle;
+	UPROPERTY()
+	FTimerHandle HealthTimerHandle;
+	UPROPERTY()
+	UHealthComponent* HealthComponent;
 	UPROPERTY()
 	APlayerHUD* PlayerHUD;
 	

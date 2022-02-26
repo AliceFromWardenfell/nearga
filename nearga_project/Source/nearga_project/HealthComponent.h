@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "PlayerHUD.h"
 #include "HealthComponent.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), DisplayName="HealthComponent" )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable, DisplayName="HealthComponent" )
 class NEARGA_PROJECT_API UHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -34,5 +35,8 @@ protected:
 	int32 InitialHealth;
 	UPROPERTY(BlueprintReadOnly)
 	int32 CurrentHealth;
+
+	UPROPERTY()
+	APlayerHUD* PlayerHUD;
 	
 };
