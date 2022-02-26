@@ -30,7 +30,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	int32 MaxHealth;
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category="Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Health")
 	int32 InitialHealth;
 	UPROPERTY(BlueprintReadOnly)
 	int32 CurrentHealth;

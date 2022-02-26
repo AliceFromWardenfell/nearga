@@ -35,7 +35,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
 	int32 MaxSatiation;
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category="Satiation")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
 	int32 InitialSatiation;
 	UPROPERTY(BlueprintReadOnly)
 	int32 CurrentSatiation;

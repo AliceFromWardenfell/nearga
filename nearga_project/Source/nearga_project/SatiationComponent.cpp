@@ -16,7 +16,7 @@ USatiationComponent::USatiationComponent()	:
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
+	
 	UE_LOG(LogTemp, Warning, TEXT("SatiationComponent has constructed"));
 }
 
@@ -24,13 +24,13 @@ USatiationComponent::USatiationComponent()	:
 void USatiationComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("In satioation component BeginPlay"));
+	UE_LOG(LogTemp, Warning, TEXT("In satiation component BeginPlay"));
 	
 	PlayerHUD = Cast<APlayerHUD>(GetWorld()->GetFirstPlayerController()->GetHUD());
 	check(PlayerHUD != nullptr);
 	
-	AActor* Owner = GetOwner();
-	Owner->GetWorldTimerManager().SetTimer(TimerHandle, this, &USatiationComponent::TakeHungerDamage, HungerDamageRate, true, 0.5f);
+	CurrentSatiation = InitialSatiation;
+	GetOwner()->GetWorldTimerManager().SetTimer(TimerHandle, this, &USatiationComponent::TakeHungerDamage, HungerDamageRate, true, 0.5f);
 	UE_LOG(LogTemp, Warning, TEXT("Timer has been set"));
 }
 
@@ -39,6 +39,7 @@ void USatiationComponent::TakeHungerDamage()
 	CurrentSatiation = FMath::Clamp(CurrentSatiation - HungerDamage, 0, MaxSatiation);
 	PlayerHUD->UpdateSatiation(CurrentSatiation, MaxSatiation);
 	UE_LOG(LogTemp, Warning, TEXT("Got %d hunger damage"), HungerDamage);
+	UE_LOG(LogTemp, Warning, TEXT("Current satiation: %d"), CurrentSatiation);
 }
 
 void USatiationComponent::Eat(const int32 PointsToRestore)
