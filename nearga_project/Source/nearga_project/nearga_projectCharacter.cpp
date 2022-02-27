@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "DrawDebugHelpers.h"
 
 //////////////////////////////////////////////////////////////////////////
 // Anearga_projectCharacter
@@ -104,6 +105,29 @@ void Anearga_projectCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVect
 void Anearga_projectCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
 		StopJumping();
+}
+
+void Anearga_projectCharacter::TraceForward()
+{
+	FVector					EyesLocation;
+	FRotator				Rotation;
+	FHitResult				HitResult;
+	FCollisionQueryParams	TraceParams;
+
+	GetController()->GetPlayerViewPoint(EyesLocation, Rotation);
+	FVector EndTraceLocation = EyesLocation + (Rotation.Vector() * 2000);
+
+	bool bIsHit = GetWorld()->LineTraceSingleByChannel(HitResult, EyesLocation, EndTraceLocation, ECC_Visibility, TraceParams);
+
+	//DrawDebugLine(GetWorld(), EyesLocation, EndTraceLocation, FColor::Orange, false, 2.0);
+	if (bIsHit && FVector::Dist(GetActorLocation(), HitResult.ImpactPoint) <= 200.0)
+	{
+		check(GEngine != nullptr);
+		GEngine->AddOnScreenDebugMessage(-1, 2.0, FColor::Orange, HitResult.Actor->GetName());
+	}
+	
+	//UE_LOG(LogTemp, Warning, TEXT("Distance = %f"), HitResult.Distance);
+
 }
 
 void Anearga_projectCharacter::TurnAtRate(float Rate)
