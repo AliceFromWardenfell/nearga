@@ -9,7 +9,6 @@
 USatiationComponent::USatiationComponent()	:
 	MaxSatiation(100),
 	InitialSatiation(MaxSatiation),
-	CurrentSatiation(InitialSatiation),
 	HungerPower(5),
 	HungerRate(0.5),
 	DamageToInflict(5),
