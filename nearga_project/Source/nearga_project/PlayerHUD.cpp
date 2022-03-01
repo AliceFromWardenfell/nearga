@@ -9,20 +9,20 @@ void APlayerHUD::BeginPlay()
 
 	if (PlayerWidgetClass)
 	{
-		WidgetHUD = CreateWidget<UWidgetHUD>(GetWorld(), PlayerWidgetClass);
-		check(WidgetHUD != nullptr);
+		PlayerPropertiesWidget = CreateWidget<UPlayerPropertiesWidget>(GetWorld(), PlayerWidgetClass);
+		check(PlayerPropertiesWidget != nullptr);
 		
 		UE_LOG(LogTemp, Warning, TEXT("Added to viewport"));
-		WidgetHUD->AddToViewport();
+		PlayerPropertiesWidget->AddToViewport();
 	}
 }
 
 void APlayerHUD::UpdateSatiation(int32 CurrentSatiation, int32 MaxSatiation)
 {
-	WidgetHUD->UpdateSatiation(CurrentSatiation, MaxSatiation);
+	PlayerPropertiesWidget->UpdateSatiation(CurrentSatiation, MaxSatiation);
 }
 
 void APlayerHUD::UpdateHealth(int32 CurrentHealth, int32 MaxHealth)
 {
-	WidgetHUD->UpdateHealth(CurrentHealth, MaxHealth);
+	PlayerPropertiesWidget->UpdateHealth(CurrentHealth, MaxHealth);
 }

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
-#include "Widgets/WidgetHUD.h"
+#include "Widgets/PlayerPropertiesWidget.h"
 #include "PlayerHUD.generated.h"
 
 /**
@@ -32,6 +32,6 @@ public:
 private:
 	
 	UPROPERTY()
-	UWidgetHUD* WidgetHUD;
+	UPlayerPropertiesWidget* PlayerPropertiesWidget;
 	
 };

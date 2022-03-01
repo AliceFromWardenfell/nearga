@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "WidgetHUD.generated.h"
+#include "PlayerPropertiesWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class NEARGA_PROJECT_API UWidgetHUD : public UUserWidget
+class NEARGA_PROJECT_API UPlayerPropertiesWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
