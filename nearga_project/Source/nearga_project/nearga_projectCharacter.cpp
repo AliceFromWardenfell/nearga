@@ -9,6 +9,7 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "DrawDebugHelpers.h"
+#include "Interfaces/InteractInterface.h"
 
 //////////////////////////////////////////////////////////////////////////
 // Anearga_projectCharacter
@@ -122,8 +123,13 @@ void Anearga_projectCharacter::TraceForward()
 	//DrawDebugLine(GetWorld(), EyesLocation, EndTraceLocation, FColor::Orange, false, 2.0);
 	if (bIsHit && FVector::Dist(GetActorLocation(), HitResult.ImpactPoint) <= 200.0)
 	{
-		check(GEngine != nullptr);
-		GEngine->AddOnScreenDebugMessage(-1, 2.0, FColor::Orange, HitResult.Actor->GetName());
+		//check(GEngine != nullptr);
+		//GEngine->AddOnScreenDebugMessage(-1, 2.0, FColor::Orange, HitResult.Actor->GetName());
+		IInteractInterface* InteractInterface = Cast<IInteractInterface>(HitResult.GetActor());
+		if (InteractInterface)
+		{
+			InteractInterface->ShowInfo();
+		}
 	}
 	
 	//UE_LOG(LogTemp, Warning, TEXT("Distance = %f"), HitResult.Distance);

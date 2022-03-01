@@ -2,7 +2,6 @@
 
 
 #include "SatiationComponent.h"
-#include "PlayerHUD.h"
 #include "Blueprint/UserWidget.h"
 
 // Sets default values for this component's properties

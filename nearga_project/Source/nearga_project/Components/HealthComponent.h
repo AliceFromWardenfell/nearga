@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "PlayerHUD.h"
+#include "../PlayerHUD.h"
 #include "HealthComponent.generated.h"
 
 
