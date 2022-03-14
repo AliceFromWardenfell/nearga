@@ -125,10 +125,11 @@ void Anearga_projectCharacter::TraceForward()
 	{
 		//check(GEngine != nullptr);
 		//GEngine->AddOnScreenDebugMessage(-1, 2.0, FColor::Orange, HitResult.Actor->GetName());
+		
 		IInteractInterface* InteractInterface = Cast<IInteractInterface>(HitResult.GetActor());
 		if (InteractInterface)
 		{
-			InteractInterface->ShowInfo();
+			InteractInterface->ShowInfoOnTrace();
 		}
 	}
 	

@@ -13,5 +13,13 @@ UCLASS()
 class NEARGA_PROJECT_API AHealingKit : public AExpendableItem
 {
 	GENERATED_BODY()
+
+protected:
+
+	void BeginPlay() override;
+	
+public:
+
+	AHealingKit();
 	
 };

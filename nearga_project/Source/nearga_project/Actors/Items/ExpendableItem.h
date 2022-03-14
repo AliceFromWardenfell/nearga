@@ -3,12 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "nearga_project/Interfaces/InteractInterface.h"
+#include "NeargaActor.h"
 #include "ExpendableItem.generated.h"
 
 UCLASS(Abstract)
-class NEARGA_PROJECT_API AExpendableItem : public AActor, public IInteractInterface
+class NEARGA_PROJECT_API AExpendableItem : public ANeargaActor
 {
 	GENERATED_BODY()
 	
@@ -19,10 +18,17 @@ public:
 protected:
 
 	virtual void BeginPlay() override;
-	virtual void ShowInfo() override;
 
 public:
 	
 	virtual void Tick(float DeltaTime) override;
+
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties")
+	FName ItemName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties")
+	int32 PointsToRestore;
 
 };

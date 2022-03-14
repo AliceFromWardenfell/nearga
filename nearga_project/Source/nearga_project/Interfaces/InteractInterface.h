@@ -25,6 +25,6 @@ class NEARGA_PROJECT_API IInteractInterface
 public:
 
 	UFUNCTION()
-	virtual void ShowInfo() = 0;
+	virtual void ShowInfoOnTrace() = 0;
 	
 };
