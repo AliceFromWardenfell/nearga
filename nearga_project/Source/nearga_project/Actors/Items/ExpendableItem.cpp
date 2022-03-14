@@ -5,7 +5,7 @@ AExpendableItem::AExpendableItem() :
 	PointsToRestore(10)
 {
 	PrimaryActorTick.bCanEverTick = true;
-
+	bIsInteractable = true;
 }
 
 void AExpendableItem::BeginPlay()

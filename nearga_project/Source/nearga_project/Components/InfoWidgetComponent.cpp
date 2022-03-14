@@ -3,8 +3,8 @@
 UInfoWidgetComponent::UInfoWidgetComponent(const FObjectInitializer& ObjectInitializer)
 {
 	PrimaryComponentTick.bCanEverTick = true;
-	PrimaryComponentTick.bStartWithTickEnabled = false; // Dosn't working, hmm..
-
+	//PrimaryComponentTick.bStartWithTickEnabled = false; // Dosn't work, hmm..
+	
 	InfoRadius = CreateDefaultSubobject<USphereComponent>(TEXT("InfoRadius"));
 	InfoRadius->InitSphereRadius(400.0);
 
@@ -17,7 +17,7 @@ UInfoWidgetComponent::UInfoWidgetComponent(const FObjectInitializer& ObjectIniti
 		InfoRadius->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
 	}
 
-	//SetTickMode(ETickMode::Automatic);
+	//
 	//GetUserWidgetObject()->SetVisibility(ESlateVisibility::Hidden);
 	//FAttachmentTransformRules AttachmentRules = FAttachmentTransformRules::KeepRelativeTransform;
 	// bool bCheck = InfoRadius->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
@@ -34,10 +34,9 @@ UInfoWidgetComponent::UInfoWidgetComponent(const FObjectInitializer& ObjectIniti
 void UInfoWidgetComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
-	
-	SetComponentTickEnabled(true);
+	SetComponentTickEnabled(false);
+	GetUserWidgetObject()->SetVisibility(ESlateVisibility::Hidden);
 	//GetUserWidgetObject()->RemoveFromParent();
 	//InfoRadius->OnComponentBeginOverlap.AddDynamic(this, &ANeargaActor::AddInfoWidgetToViewport);
 	//InfoRadius->OnComponentEndOverlap.AddDynamic(this, &ANeargaActor::RemoveInfoWidgetFromViewport);
@@ -67,5 +66,5 @@ void UInfoWidgetComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// 	}
 	// }
 	
-	UE_LOG(LogTemp, Warning, TEXT("InfoWidgetComponent Tick"));
+	//UE_LOG(LogTemp, Warning, TEXT("InfoWidgetComponent Tick"));
 }

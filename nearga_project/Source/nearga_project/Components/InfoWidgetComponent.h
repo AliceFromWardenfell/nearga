@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/WidgetComponent.h"
 #include "Components/SphereComponent.h"
-#include "nearga_project/Widgets/ObjectInfoWidget.h"
+#include "nearga_project/Interfaces/InteractInterface.h"
 #include "InfoWidgetComponent.generated.h"
 
 UCLASS()
