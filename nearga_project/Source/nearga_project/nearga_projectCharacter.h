@@ -36,6 +36,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Interactions)
+	float ItemsInfoRadius;
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -66,7 +69,13 @@ protected:
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
 	UFUNCTION(BlueprintCallable)
-	void TraceForward();
+	bool TraceForward(FHitResult& HitResult);
+
+	UFUNCTION(BlueprintCallable)
+	void ShowInfoAboutInteractableItem();
+
+	// UFUNCTION(BlueprintCallable)
+	// void Interact();
 	
 protected:
 	// APawn interface
@@ -78,5 +87,6 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	
 };
 

@@ -22,7 +22,8 @@ void Anearga_projectCharacter::BeginPlay()
 	
 }
 
-Anearga_projectCharacter::Anearga_projectCharacter()
+Anearga_projectCharacter::Anearga_projectCharacter() :
+	ItemsInfoRadius(200.0)
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -84,6 +85,8 @@ void Anearga_projectCharacter::SetupPlayerInputComponent(class UInputComponent* 
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &Anearga_projectCharacter::OnResetVR);
+
+	//PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &Anearga_projectCharacter::Interact);
 }
 
 
@@ -108,20 +111,27 @@ void Anearga_projectCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVect
 		StopJumping();
 }
 
-void Anearga_projectCharacter::TraceForward()
+bool Anearga_projectCharacter::TraceForward(FHitResult& HitResult)
 {
 	FVector					EyesLocation;
 	FRotator				Rotation;
-	FHitResult				HitResult;
 	FCollisionQueryParams	TraceParams;
 
 	GetController()->GetPlayerViewPoint(EyesLocation, Rotation);
 	FVector EndTraceLocation = EyesLocation + (Rotation.Vector() * 2000);
 
-	bool bIsHit = GetWorld()->LineTraceSingleByChannel(HitResult, EyesLocation, EndTraceLocation, ECC_Visibility, TraceParams);
+	return GetWorld()->LineTraceSingleByChannel(HitResult, EyesLocation, EndTraceLocation, ECC_Visibility, TraceParams);
 
 	//DrawDebugLine(GetWorld(), EyesLocation, EndTraceLocation, FColor::Orange, false, 2.0);
-	if (bIsHit && FVector::Dist(GetActorLocation(), HitResult.ImpactPoint) <= 200.0)
+	//UE_LOG(LogTemp, Warning, TEXT("Distance = %f"), HitResult.Distance);
+}
+
+void Anearga_projectCharacter::ShowInfoAboutInteractableItem()
+{
+	FHitResult HitResult;
+	bool bIsHit = TraceForward(HitResult);
+
+	if (bIsHit && FVector::Dist(GetActorLocation(), HitResult.ImpactPoint) <= ItemsInfoRadius)
 	{
 		//check(GEngine != nullptr);
 		//GEngine->AddOnScreenDebugMessage(-1, 2.0, FColor::Orange, HitResult.Actor->GetName());
@@ -132,10 +142,11 @@ void Anearga_projectCharacter::TraceForward()
 			InteractInterface->ShowInfoOnTrace();
 		}
 	}
-	
-	//UE_LOG(LogTemp, Warning, TEXT("Distance = %f"), HitResult.Distance);
-
 }
+
+// void Anearga_projectCharacter::Interact()
+// {
+// }
 
 void Anearga_projectCharacter::TurnAtRate(float Rate)
 {

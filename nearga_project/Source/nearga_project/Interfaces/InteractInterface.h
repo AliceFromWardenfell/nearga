@@ -20,5 +20,8 @@ public:
 
 	UFUNCTION()
 	virtual void ShowInfoOnTrace() = 0;
+
+	// UFUNCTION()
+	// virtual void InteractOnTrace() = 0;
 	
 };
