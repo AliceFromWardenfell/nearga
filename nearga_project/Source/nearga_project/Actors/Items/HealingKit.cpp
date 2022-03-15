@@ -8,10 +8,3 @@ AHealingKit::AHealingKit()
 	ItemName = TEXT("HEALING KIT");
 	PointsToRestore = 20;
 }
-
-void AHealingKit::BeginPlay()
-{
-	Super::BeginPlay();
-
-	//ObjectInfoWidget->
-}
