@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "PlayerHUD.h"
+#include "Actors/Items/ExpendableItem.h"
 #include "nearga_projectCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -74,8 +75,8 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void ShowInfoAboutInteractableItem();
 
-	// UFUNCTION(BlueprintCallable)
-	// void Interact();
+	UFUNCTION(BlueprintCallable)
+	void Interact();
 	
 protected:
 	// APawn interface

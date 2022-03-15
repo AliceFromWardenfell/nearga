@@ -86,7 +86,7 @@ void Anearga_projectCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &Anearga_projectCharacter::OnResetVR);
 
-	//PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &Anearga_projectCharacter::Interact);
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &Anearga_projectCharacter::Interact);
 }
 
 
@@ -144,9 +144,20 @@ void Anearga_projectCharacter::ShowInfoAboutInteractableItem()
 	}
 }
 
-// void Anearga_projectCharacter::Interact()
-// {
-// }
+void Anearga_projectCharacter::Interact()
+{
+	FHitResult HitResult;
+	bool bIsHit = TraceForward(HitResult);
+
+	if (bIsHit)
+	{
+		AExpendableItem* item = Cast<AExpendableItem>(HitResult.GetActor());
+		if (item)
+		{
+			item->Interact();
+		}
+	}
+}
 
 void Anearga_projectCharacter::TurnAtRate(float Rate)
 {

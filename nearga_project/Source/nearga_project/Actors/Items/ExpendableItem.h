@@ -29,6 +29,9 @@ private:
 public:
 	
 	virtual void Tick(float DeltaTime) override;
+	
+	UFUNCTION(Server, Reliable)
+	virtual void Interact();
 
 public:
 

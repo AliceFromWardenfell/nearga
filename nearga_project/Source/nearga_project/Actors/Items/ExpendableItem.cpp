@@ -47,3 +47,10 @@ void AExpendableItem::Tick(float DeltaTime)
 
 }
 
+void AExpendableItem::Interact_Implementation()
+{
+	
+	UE_LOG(LogTemp, Warning, TEXT("Interacted"));
+}
+
+
