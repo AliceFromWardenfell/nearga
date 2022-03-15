@@ -5,7 +5,6 @@
 #include "Kismet/GameplayStatics.h"
 
 ANeargaActor::ANeargaActor() :
-	bIsInteractable(false),
 	SecondsToHide(0.5)
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -20,7 +19,6 @@ ANeargaActor::ANeargaActor() :
 void ANeargaActor::BeginPlay()
 {
 	Super::BeginPlay();
-
 	InfoWidgetComponentRef = FindComponentByClass<UInfoWidgetComponent>();
 	// if (ObjectInfoWidgetClass)
 	// {

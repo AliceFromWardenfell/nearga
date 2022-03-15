@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
 #include "Widgets/PlayerPropertiesWidget.h"
+#include "Widgets/PressKeyToInteractWidget.h"
 #include "PlayerHUD.generated.h"
 
 /**

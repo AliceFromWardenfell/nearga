@@ -5,7 +5,7 @@
 
 AHealingKit::AHealingKit()
 {
-	ItemName = TEXT("Healing kit");
+	ItemName = TEXT("HEALING KIT");
 	PointsToRestore = 20;
 }
 

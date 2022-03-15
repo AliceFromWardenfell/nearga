@@ -11,8 +11,6 @@ void APlayerHUD::BeginPlay()
 	{
 		PlayerPropertiesWidget = CreateWidget<UPlayerPropertiesWidget>(GetWorld(), PlayerWidgetClass);
 		check(PlayerPropertiesWidget != nullptr);
-		
-		UE_LOG(LogTemp, Warning, TEXT("Added to viewport"));
 		PlayerPropertiesWidget->AddToViewport();
 	}
 }

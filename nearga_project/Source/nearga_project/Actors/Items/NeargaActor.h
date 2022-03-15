@@ -37,11 +37,7 @@ public:
 	// 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 public:
-
-	bool bIsInteractable;
-	// UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
-	// TSubclassOf<UUserWidget> ObjectInfoWidgetClass;
-	//
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InfoWidget")
 	float SecondsToHide;
 	

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "NeargaActor.h"
+#include "nearga_project/PlayerHUD.h"
 #include "ExpendableItem.generated.h"
 
 UCLASS(Abstract)
@@ -18,7 +19,13 @@ public:
 protected:
 
 	virtual void BeginPlay() override;
+	virtual void ShowInfoOnTrace() override;
 
+private:
+
+	UFUNCTION()
+	void HidePressKeyWidget();
+	
 public:
 	
 	virtual void Tick(float DeltaTime) override;
@@ -30,5 +37,16 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties")
 	int32 PointsToRestore;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
+	TSubclassOf<UUserWidget> PressKeyWidgetClass;
+	
+private:
+	
+	UPROPERTY()
+	UPressKeyToInteractWidget* PressKeyWidget;
 
+	UPROPERTY()
+	FTimerHandle PressKeyTimerHandle;
+	
 };
