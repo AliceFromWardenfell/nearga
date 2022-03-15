@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "NeargaActor.h"
-#include "nearga_project/PlayerHUD.h"
+#include "nearga_project/Widgets/PressKeyToInteractWidget.h"
 #include "ExpendableItem.generated.h"
 
 UCLASS(Abstract)
@@ -31,7 +31,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	UFUNCTION(Server, Reliable)
-	virtual void Interact();
+	void Interact();
 
 public:
 
