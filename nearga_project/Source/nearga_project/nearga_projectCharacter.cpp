@@ -17,13 +17,14 @@
 void Anearga_projectCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("Character has begun play"));
 	
+	InfoWidgetComponentRef = FindComponentByClass<UInfoWidgetComponent>();
+	UE_LOG(LogTemp, Warning, TEXT("Character has begun play"));
 }
 
 Anearga_projectCharacter::Anearga_projectCharacter() :
-	ItemsInfoRadius(200.0)
+	ItemsInfoRadius(200.0),
+	SecondsToHide(0.5)
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -87,6 +88,13 @@ void Anearga_projectCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &Anearga_projectCharacter::OnResetVR);
 
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &Anearga_projectCharacter::Interact);
+}
+
+void Anearga_projectCharacter::HideWidget()
+{
+	UE_LOG(LogTemp, Warning, TEXT("In HideWidget"))
+	InfoWidgetComponentRef->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Hidden);
+	InfoWidgetComponentRef->SetComponentTickEnabled(false);
 }
 
 
@@ -156,6 +164,16 @@ void Anearga_projectCharacter::Interact()
 		{
 			item->Interact();
 		}
+	}
+}
+
+void Anearga_projectCharacter::ShowInfoOnTrace()
+{
+	if (InfoWidgetComponentRef)
+	{
+		InfoWidgetComponentRef->SetComponentTickEnabled(true);
+		InfoWidgetComponentRef->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Visible);
+		GetWorldTimerManager().SetTimer(InfoTimerHandle, this, &Anearga_projectCharacter::HideWidget, SecondsToHide, false);
 	}
 }
 

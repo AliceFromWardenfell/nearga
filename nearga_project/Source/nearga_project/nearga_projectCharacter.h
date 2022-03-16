@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "PlayerHUD.h"
 #include "Actors/Items/ExpendableItem.h"
+#include "nearga_project/Interfaces/InteractInterface.h"
 #include "nearga_projectCharacter.generated.h"
 
 UCLASS(config=Game)
-class Anearga_projectCharacter : public ACharacter
+class Anearga_projectCharacter : public ACharacter, public IInteractInterface
 {
 	GENERATED_BODY()
 
@@ -40,6 +40,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Interactions)
 	float ItemsInfoRadius;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InfoWidget")
+	float SecondsToHide;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "InfoWidget")
+	UInfoWidgetComponent* InfoWidgetComponentRef;
+
+protected:
+
+	UPROPERTY()
+	FTimerHandle InfoTimerHandle;
+	
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -77,11 +88,17 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	void Interact();
+
+	UFUNCTION()
+	virtual void ShowInfoOnTrace() override;
 	
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
+
+	UFUNCTION()
+	void HideWidget();
 
 public:
 	/** Returns CameraBoom subobject **/
