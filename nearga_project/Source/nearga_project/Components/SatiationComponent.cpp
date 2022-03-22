@@ -40,7 +40,8 @@ void USatiationComponent::BeginPlay()
 void USatiationComponent::TakeHungerDamage()
 {
 	CurrentSatiation = FMath::Clamp(CurrentSatiation - HungerPower, 0, MaxSatiation);
-	PlayerHUD->UpdateSatiation(CurrentSatiation, MaxSatiation);
+	//PlayerHUD->UpdateSatiation(CurrentSatiation, MaxSatiation);
+	
 	//UE_LOG(LogTemp, Warning, TEXT("Got %d damage to satiation"), HungerDamage);
 	//UE_LOG(LogTemp, Warning, TEXT("Current satiation: %d"), CurrentSatiation);
 }
@@ -48,7 +49,8 @@ void USatiationComponent::TakeHungerDamage()
 void USatiationComponent::Eat(const int32 PointsToRestore)
 {
 	CurrentSatiation = FMath::Clamp(CurrentSatiation + PointsToRestore, 0, MaxSatiation);
-	PlayerHUD->UpdateSatiation(CurrentSatiation, MaxSatiation);
+	//PlayerHUD->UpdateSatiation(CurrentSatiation, MaxSatiation);
+
 	UE_LOG(LogTemp, Warning, TEXT("Restored %d satiation"), PointsToRestore);
 }
 

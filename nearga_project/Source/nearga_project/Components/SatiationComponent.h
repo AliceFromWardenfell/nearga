@@ -55,7 +55,7 @@ protected:
 	//FTimerHandle HealthTimerHandle;
 	//UPROPERTY()
 	//UHealthComponent* HealthComponent;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	APlayerHUD* PlayerHUD;
 	
 };

@@ -20,9 +20,9 @@ public:
 
 	virtual void BeginPlay() override;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void UpdateSatiation(int32 CurrentSatiation, int32 MaxSatiation);
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void UpdateHealth(int32 CurrentHealth, int32 MaxHealth);
 	
 public:

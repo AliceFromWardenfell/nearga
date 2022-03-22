@@ -36,7 +36,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	int32 CurrentHealth;
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	APlayerHUD* PlayerHUD;
 	
 };
