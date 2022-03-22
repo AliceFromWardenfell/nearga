@@ -11,9 +11,9 @@ class NEARGA_PROJECT_API UPlayerPropertiesWidget : public UUserWidget
 
 public:
 
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void UpdateHealth(int32 CurrentHealth, int32 MaxHealth);
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void UpdateSatiation(int32 CurrentSatiation, int32 MaxSatiation);
 	
 };

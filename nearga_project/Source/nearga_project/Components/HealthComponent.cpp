@@ -29,7 +29,7 @@ void UHealthComponent::TakeDamage(const int32 Damage)
 {
 	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0, MaxHealth);
 	//PlayerHUD->UpdateHealth(CurrentHealth, MaxHealth);
-	UE_LOG(LogTemp, Warning, TEXT("Got %d damage"), Damage);
+	//UE_LOG(LogTemp, Warning, TEXT("Got %d damage"), Damage);
 }
 
 void UHealthComponent::RestoreHealth(const int32 PointsToRestore)
