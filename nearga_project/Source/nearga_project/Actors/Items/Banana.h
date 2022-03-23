@@ -12,5 +12,9 @@ class NEARGA_PROJECT_API ABanana : public AExpendableItem
 public:
 
 	ABanana();
+
+protected:
+
+	virtual void Interact_Implementation() override;
 	
 };
