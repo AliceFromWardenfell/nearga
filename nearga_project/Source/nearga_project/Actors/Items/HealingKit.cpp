@@ -9,9 +9,9 @@ AHealingKit::AHealingKit()
 	PointsToRestore = 20;
 }
 
-void AHealingKit::Server_Interact_Implementation(ACharacter* InteractingCharacter)
+void AHealingKit::ServerInteract_Implementation()
 {
-	Super::Server_Interact_Implementation(InteractingCharacter);
+	Super::ServerInteract_Implementation();
 
 	UE_LOG(LogTemp, Warning, TEXT("This is Healing kit"));
 	RestoreHealthPoints();

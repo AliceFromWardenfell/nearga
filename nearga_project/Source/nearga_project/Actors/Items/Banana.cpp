@@ -9,9 +9,9 @@ ABanana::ABanana()
 	PointsToRestore = 700;
 }
 
-void ABanana::Server_Interact_Implementation(ACharacter* InteractingCharacter)
+void ABanana::ServerInteract_Implementation()
 {
-	Super::Server_Interact_Implementation(InteractingCharacter);
+	Super::ServerInteract_Implementation();
 
 	UE_LOG(LogTemp, Warning, TEXT("This is Banana"));
 	RestoreSatiationPoints();

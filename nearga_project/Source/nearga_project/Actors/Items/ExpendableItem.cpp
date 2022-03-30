@@ -48,7 +48,7 @@ void AExpendableItem::Tick(float DeltaTime)
 
 }
 
-void AExpendableItem::Server_Interact_Implementation(ACharacter* InteractingCharacter)
+void AExpendableItem::ServerInteract_Implementation()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Interacted"));
 }

@@ -15,7 +15,7 @@ public:
 
 protected:
 
-	virtual void Server_Interact_Implementation(ACharacter* InteractingCharacter) override;
+	virtual void ServerInteract_Implementation() override;
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void RestoreHealthPoints();

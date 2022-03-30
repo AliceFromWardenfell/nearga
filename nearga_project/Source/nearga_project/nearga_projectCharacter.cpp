@@ -162,7 +162,7 @@ void Anearga_projectCharacter::Interact()
 		AExpendableItem* item = Cast<AExpendableItem>(HitResult.GetActor());
 		if (item)
 		{
-			item->Server_Interact(this);
+			item->ServerInteract();
 		}
 	}
 }
