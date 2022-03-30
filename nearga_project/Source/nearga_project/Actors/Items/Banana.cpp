@@ -9,9 +9,9 @@ ABanana::ABanana()
 	PointsToRestore = 70;
 }
 
-void ABanana::Interact_Implementation()
+void ABanana::Server_Interact_Implementation()
 {
-	Super::Interact_Implementation();
+	Super::Server_Interact_Implementation();
 
-	UE_LOG(LogTemp, Warning, TEXT("This is banana"));
+	UE_LOG(LogTemp, Warning, TEXT("This is Banana"));
 }

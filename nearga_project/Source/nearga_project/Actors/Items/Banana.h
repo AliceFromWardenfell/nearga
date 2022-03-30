@@ -15,6 +15,6 @@ public:
 
 protected:
 
-	virtual void Interact_Implementation() override;
+	virtual void Server_Interact_Implementation() override;
 	
 };

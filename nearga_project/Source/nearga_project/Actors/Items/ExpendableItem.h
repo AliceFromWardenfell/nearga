@@ -31,7 +31,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	UFUNCTION(Server, Reliable)
-	void Interact();
+	void Server_Interact();
 
 public:
 

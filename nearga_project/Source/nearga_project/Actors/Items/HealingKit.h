@@ -12,5 +12,9 @@ class NEARGA_PROJECT_API AHealingKit : public AExpendableItem
 public:
 
 	AHealingKit();
+
+protected:
+
+	virtual void Server_Interact_Implementation() override;
 	
 };

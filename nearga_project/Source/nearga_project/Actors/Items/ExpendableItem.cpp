@@ -7,6 +7,7 @@ AExpendableItem::AExpendableItem() :
 	PointsToRestore(10)
 {
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
 	
 	static ConstructorHelpers::FClassFinder<UUserWidget> Finder(TEXT("/Game/LevelBlueprints/Widgets/BPW_PressKeyToInteract"));
 	if (Finder.Succeeded())
@@ -47,7 +48,7 @@ void AExpendableItem::Tick(float DeltaTime)
 
 }
 
-void AExpendableItem::Interact_Implementation()
+void AExpendableItem::Server_Interact_Implementation()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Interacted"));
 }
