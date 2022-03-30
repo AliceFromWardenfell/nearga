@@ -15,6 +15,9 @@ public:
 
 protected:
 
-	virtual void Server_Interact_Implementation() override;
+	virtual void Server_Interact_Implementation(ACharacter* InteractingCharacter) override;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void RestoreSatiationPoints();
 	
 };

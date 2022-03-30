@@ -23,7 +23,7 @@ protected:
 
 private:
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void HidePressKeyWidget();
 	
 public:
@@ -31,7 +31,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	UFUNCTION(Server, Reliable)
-	void Server_Interact();
+	void Server_Interact(ACharacter* InteractingCharacter);
 
 public:
 

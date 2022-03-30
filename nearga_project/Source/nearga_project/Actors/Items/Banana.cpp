@@ -6,12 +6,13 @@
 ABanana::ABanana()
 {
 	ItemName = TEXT("BANANA");
-	PointsToRestore = 70;
+	PointsToRestore = 700;
 }
 
-void ABanana::Server_Interact_Implementation()
+void ABanana::Server_Interact_Implementation(ACharacter* InteractingCharacter)
 {
-	Super::Server_Interact_Implementation();
+	Super::Server_Interact_Implementation(InteractingCharacter);
 
 	UE_LOG(LogTemp, Warning, TEXT("This is Banana"));
+	RestoreSatiationPoints();
 }
