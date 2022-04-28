@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #include "nearga_projectCharacter.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -8,23 +6,11 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "DrawDebugHelpers.h"
 #include "Interfaces/InteractInterface.h"
 
-//////////////////////////////////////////////////////////////////////////
-// Anearga_projectCharacter
-
-void Anearga_projectCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-	
-	InfoWidgetComponentRef = FindComponentByClass<UInfoWidgetComponent>();
-	UE_LOG(LogTemp, Warning, TEXT("Character has begun play"));
-}
-
 Anearga_projectCharacter::Anearga_projectCharacter() :
-	ItemsInfoRadius(200.0),
-	SecondsToHide(0.5)
+	SecondsToHide(0.5),
+	ItemsInfoRadius(200)
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -59,6 +45,13 @@ Anearga_projectCharacter::Anearga_projectCharacter() :
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
 
+void Anearga_projectCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	InfoWidgetComponentRef = FindComponentByClass<UInfoWidgetComponent>();
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -90,14 +83,6 @@ void Anearga_projectCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &Anearga_projectCharacter::Interact);
 }
 
-void Anearga_projectCharacter::HideWidget()
-{
-	UE_LOG(LogTemp, Warning, TEXT("In HideWidget"))
-	InfoWidgetComponentRef->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Hidden);
-	InfoWidgetComponentRef->SetComponentTickEnabled(false);
-}
-
-
 void Anearga_projectCharacter::OnResetVR()
 {
 	// If nearga_project is added to a project via 'Add Feature' in the Unreal Editor the dependency on HeadMountedDisplay in nearga_project.Build.cs is not automatically propagated
@@ -119,7 +104,7 @@ void Anearga_projectCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVect
 		StopJumping();
 }
 
-bool Anearga_projectCharacter::TraceForward(FHitResult& HitResult)
+bool Anearga_projectCharacter::TraceForward(FHitResult& HitResult) const
 {
 	FVector					EyesLocation;
 	FRotator				Rotation;
@@ -129,21 +114,15 @@ bool Anearga_projectCharacter::TraceForward(FHitResult& HitResult)
 	FVector EndTraceLocation = EyesLocation + (Rotation.Vector() * 2000);
 
 	return GetWorld()->LineTraceSingleByChannel(HitResult, EyesLocation, EndTraceLocation, ECC_Visibility, TraceParams);
-
-	//DrawDebugLine(GetWorld(), EyesLocation, EndTraceLocation, FColor::Orange, false, 2.0);
-	//UE_LOG(LogTemp, Warning, TEXT("Distance = %f"), HitResult.Distance);
 }
 
-void Anearga_projectCharacter::ShowInfoAboutInteractableItem()
+void Anearga_projectCharacter::ShowInfoAboutInteractableItem() const
 {
 	FHitResult HitResult;
 	bool bIsHit = TraceForward(HitResult);
 
 	if (bIsHit && FVector::Dist(GetActorLocation(), HitResult.ImpactPoint) <= ItemsInfoRadius)
 	{
-		//check(GEngine != nullptr);
-		//GEngine->AddOnScreenDebugMessage(-1, 2.0, FColor::Orange, HitResult.Actor->GetName());
-		
 		IInteractInterface* InteractInterface = Cast<IInteractInterface>(HitResult.GetActor());
 		if (InteractInterface)
 		{
@@ -159,10 +138,10 @@ void Anearga_projectCharacter::Interact()
 
 	if (bIsHit)
 	{
-		AExpendableItem* item = Cast<AExpendableItem>(HitResult.GetActor());
-		if (item)
+		AExpendableItem* Item = Cast<AExpendableItem>(HitResult.GetActor());
+		if (Item)
 		{
-			item->ServerInteract();
+			Item->ServerInteract();
 		}
 	}
 }
@@ -174,6 +153,15 @@ void Anearga_projectCharacter::ShowInfoOnTrace()
 		InfoWidgetComponentRef->SetComponentTickEnabled(true);
 		InfoWidgetComponentRef->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Visible);
 		GetWorldTimerManager().SetTimer(InfoTimerHandle, this, &Anearga_projectCharacter::HideWidget, SecondsToHide, false);
+	}
+}
+
+void Anearga_projectCharacter::HideWidget() const
+{
+	if (InfoWidgetComponentRef)
+	{
+		InfoWidgetComponentRef->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Hidden);
+		InfoWidgetComponentRef->SetComponentTickEnabled(false);
 	}
 }
 

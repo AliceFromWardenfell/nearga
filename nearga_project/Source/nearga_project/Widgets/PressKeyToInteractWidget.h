@@ -8,5 +8,4 @@ UCLASS()
 class NEARGA_PROJECT_API UPressKeyToInteractWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
 };

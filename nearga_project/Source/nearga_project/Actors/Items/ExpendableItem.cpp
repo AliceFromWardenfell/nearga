@@ -1,7 +1,5 @@
 #include "ExpendableItem.h"
 
-#include "Kismet/GameplayStatics.h"
-
 AExpendableItem::AExpendableItem() :
 	ItemName("DefaultName"),
 	PointsToRestore(10)
@@ -37,20 +35,12 @@ void AExpendableItem::ShowInfoOnTrace()
 	GetWorldTimerManager().SetTimer(PressKeyTimerHandle, this, &AExpendableItem::HidePressKeyWidget, 0.1, false);
 }
 
-void AExpendableItem::HidePressKeyWidget()
+void AExpendableItem::HidePressKeyWidget() const
 {
 	PressKeyWidget->SetVisibility(ESlateVisibility::Hidden);
-}
-
-void AExpendableItem::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 void AExpendableItem::ServerInteract_Implementation()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Interacted"));
 }
-
-

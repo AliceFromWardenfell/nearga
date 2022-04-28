@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -23,12 +21,9 @@ class Anearga_projectCharacter : public ACharacter, public IInteractInterface
  
 public:
 
+	Anearga_projectCharacter();
 	virtual void BeginPlay() override;
 	
-public:
-	
-	Anearga_projectCharacter();
-
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -37,20 +32,19 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Interactions)
-	float ItemsInfoRadius;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InfoWidget")
-	float SecondsToHide;
-	
-	UPROPERTY(BlueprintReadOnly, Category = "InfoWidget")
-	UInfoWidgetComponent* InfoWidgetComponentRef;
-
 protected:
 
 	UPROPERTY()
 	FTimerHandle InfoTimerHandle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InfoWidget")
+	float SecondsToHide;
+	UPROPERTY(BlueprintReadOnly, Category = "InfoWidget")
+	UInfoWidgetComponent* InfoWidgetComponentRef;
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Interactions")
+	float ItemsInfoRadius;
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -80,27 +74,28 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	// APawn interface
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// End of APawn interface
+	
+protected:
+
+	virtual void ShowInfoOnTrace() override;
+	
 	UFUNCTION(BlueprintCallable)
-	bool TraceForward(FHitResult& HitResult);
+	bool TraceForward(FHitResult& HitResult) const;
 
 	UFUNCTION(BlueprintCallable)
-	void ShowInfoAboutInteractableItem();
+	void ShowInfoAboutInteractableItem() const;
 
 	UFUNCTION(BlueprintCallable)
 	void Interact();
 
 	UFUNCTION()
-	virtual void ShowInfoOnTrace() override;
-	
-protected:
-	// APawn interface
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	// End of APawn interface
-
-	UFUNCTION()
-	void HideWidget();
+	void HideWidget() const;
 
 public:
+	
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/

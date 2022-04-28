@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -16,6 +14,9 @@ public:
 
 	AExpendableItem();
 
+	UFUNCTION(Server, Reliable)
+	void ServerInteract();
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -24,31 +25,19 @@ protected:
 private:
 
 	UFUNCTION(BlueprintCallable)
-	void HidePressKeyWidget();
-	
-public:
-	
-	virtual void Tick(float DeltaTime) override;
-	
-	UFUNCTION(Server, Reliable)
-	void ServerInteract();
+	void HidePressKeyWidget() const;
 
-public:
+protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties")
 	FName ItemName;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties")
 	int32 PointsToRestore;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widgets")
 	TSubclassOf<UUserWidget> PressKeyWidgetClass;
-	
-private:
-	
 	UPROPERTY()
 	UPressKeyToInteractWidget* PressKeyWidget;
-
 	UPROPERTY()
 	FTimerHandle PressKeyTimerHandle;
 	

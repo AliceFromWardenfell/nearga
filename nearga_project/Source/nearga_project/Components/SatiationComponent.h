@@ -1,36 +1,27 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "../PlayerHUD.h"
-#include "HealthComponent.h"
 #include "SatiationComponent.generated.h"
-
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable, DisplayName="SatiationComponent" )
 class NEARGA_PROJECT_API USatiationComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
+public:
+
 	USatiationComponent();
 
 protected:
-	// Called when the game starts
+
 	virtual void BeginPlay() override;
 	
 	UFUNCTION(BlueprintCallable)
 	void TakeHungerDamage();
-
 	UFUNCTION(BlueprintCallable)
 	void Eat(const int32 PointsToRestore);
 
-	//UFUNCTION(BlueprintCallable)
-	//void InflictHealthDamage();
-	
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
@@ -39,23 +30,22 @@ protected:
 	int32 InitialSatiation;
 	UPROPERTY(BlueprintReadOnly)
 	int32 CurrentSatiation;
+
+	// How many points one hunger-tick inflicts to satiation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
 	int32 HungerPower;
+	// How often one hunger-tick happens in seconds
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Satiation")
 	float HungerRate;
 
+	// How many points one damage-tick inflicts to health if hungry
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DamageFromHunger")
 	int32 DamageToInflict;
+	// How often one damage-tick happens in seconds if hungry
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DamageFromHunger")
 	float DamageRate;
 	
 	UPROPERTY()
 	FTimerHandle SatiationTimerHandle;
-	//UPROPERTY()
-	//FTimerHandle HealthTimerHandle;
-	//UPROPERTY()
-	//UHealthComponent* HealthComponent;
-	UPROPERTY(BlueprintReadOnly)
-	APlayerHUD* PlayerHUD;
 	
 };
