@@ -42,5 +42,6 @@ void AExpendableItem::HidePressKeyWidget() const
 
 void AExpendableItem::ServerInteract_Implementation()
 {
+	GEngine->AddOnScreenDebugMessage(0, 2, FColor::Purple, TEXT("I am Server!"));
 	UE_LOG(LogTemp, Warning, TEXT("Interacted"));
 }

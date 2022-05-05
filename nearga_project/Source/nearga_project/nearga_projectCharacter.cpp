@@ -8,6 +8,9 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Interfaces/InteractInterface.h"
 
+#include "Engine/Engine.h"
+#include "DrawDebugHelpers.h"
+
 Anearga_projectCharacter::Anearga_projectCharacter() :
 	SecondsToHide(0.5),
 	ItemsInfoRadius(200)
@@ -106,13 +109,26 @@ void Anearga_projectCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVect
 
 bool Anearga_projectCharacter::TraceForward(FHitResult& HitResult) const
 {
-	FVector					EyesLocation;
-	FRotator				Rotation;
+	FVector					EyesLocation = FollowCamera->GetComponentLocation();
+	FRotator				Rotation = FollowCamera->GetComponentRotation();
 	FCollisionQueryParams	TraceParams;
+	//AController*			ActorController = GetController();
 
-	GetController()->GetPlayerViewPoint(EyesLocation, Rotation);
+	
+	
+	//if (!ActorController)
+	//{
+	//	GEngine->AddOnScreenDebugMessage(0, 2, FColor::Blue, TEXT("!ActorController"));
+	//}
+	//else
+	//{
+		//GetOwner()->GetActorEyesViewPoint(EyesLocation, Rotation);
+		//ActorController->GetPlayerViewPoint(EyesLocation, Rotation);
+	//}
 	FVector EndTraceLocation = EyesLocation + (Rotation.Vector() * 2000);
-
+	
+	//DrawDebugLine(GetWorld(), EyesLocation, EndTraceLocation, FColor::Magenta, false, 4, 0, 0);
+	
 	return GetWorld()->LineTraceSingleByChannel(HitResult, EyesLocation, EndTraceLocation, ECC_Visibility, TraceParams);
 }
 
